@@ -25,3 +25,9 @@
 ## What is the difference between react.development.js and react.production.js via CDN?
 
 ### react.development.js provides additional tools which helps development of the application. It is a full version of react library with additional warnings and detailed error messages. However the file is larger in size and slower performance compared to production version. react.production.js is an optimized version and intended for final deployment of the application. It doesn't provide any warnings or development related errors as it will slow down the performance.
+
+## What are async and defer?
+
+### async doesn't stop the parsing of HTML when script tag is encountered. It downloads the resources asynchronously and once the resources are downloaded it executes as soon as possible even if HTML parsing is incomplete. Defer downloads the resources asynchronously and it is not executed untill the entire document is parsed.
+
+###
