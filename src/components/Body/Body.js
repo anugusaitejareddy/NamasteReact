@@ -1,6 +1,8 @@
 import React from "react";
 import RestaurantCard from "../RestaurantCard";
 import { RESTAURANTS } from "../../utils/mockData";
+import Shimmer from "../Shimmer/Shimmer";
+import { Link } from "react-router-dom";
 
 const INITIAL_RESTAURANTS = RESTAURANTS;
 
@@ -35,7 +37,7 @@ const Body = () => {
   }
 
   function handleResetFilters() {
-    setRestaurants(restaurants);
+    setFilteredRestaurants(restaurants);
     setSearchTerm("");
   }
 
@@ -45,6 +47,10 @@ const Body = () => {
     );
 
     setFilteredRestaurants(searchResult);
+  }
+
+  if (filteredRestaurants.length === 0) {
+    return <Shimmer />;
   }
 
   return (
@@ -64,14 +70,16 @@ const Body = () => {
       <div className="res-container">
         {filteredRestaurants.map((restaurant) => {
           return (
-            <RestaurantCard
-              key={restaurant.info.id}
-              name={restaurant.info.name}
-              cuisine={restaurant.info.cuisines}
-              rating={restaurant.info.avgRating}
-              imageId={restaurant.info.cloudinaryImageId}
-              costForTwo={restaurant.info.costForTwo}
-            />
+            <Link to={`/restaurants/${restaurant.info.id}`}>
+              <RestaurantCard
+                key={restaurant.info.id}
+                name={restaurant.info.name}
+                cuisine={restaurant.info.cuisines}
+                rating={restaurant.info.avgRating}
+                imageId={restaurant.info.cloudinaryImageId}
+                costForTwo={restaurant.info.costForTwo}
+              />
+            </Link>
           );
         })}
       </div>

@@ -2,15 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import Header from "../Header";
 import Body from "../Body";
-import {
-  createBrowserRouter,
-  Route,
-  RouterProvider,
-  Outlet,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import About from "../About";
 import Contact from "../Contact";
 import Error from "../Error";
+import RestaurantMenu from "../RestaurantMenu/RestaurantMenu";
 
 // // React ELement
 // const heading = (
@@ -59,6 +55,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/restaurants/:resId",
+        element: <RestaurantMenu />,
       },
     ],
     errorElement: <Error />,
