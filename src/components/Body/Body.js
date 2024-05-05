@@ -3,6 +3,7 @@ import RestaurantCard from "../RestaurantCard";
 import { RESTAURANTS } from "../../utils/mockData";
 import Shimmer from "../Shimmer/Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../../custom-hooks/useOnlineStatus";
 
 const INITIAL_RESTAURANTS = RESTAURANTS;
 
@@ -47,6 +48,14 @@ const Body = () => {
     );
 
     setFilteredRestaurants(searchResult);
+  }
+
+  const isOnline = useOnlineStatus();
+  console.log(isOnline);
+  if (!isOnline) {
+    return (
+      <h1>Looks like you are offline. Please check your internet connection</h1>
+    );
   }
 
   if (filteredRestaurants.length === 0) {

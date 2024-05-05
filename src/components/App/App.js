@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "../Header";
 import Body from "../Body";
@@ -7,6 +7,7 @@ import About from "../About";
 import Contact from "../Contact";
 import Error from "../Error";
 import RestaurantMenu from "../RestaurantMenu/RestaurantMenu";
+// import Grocery from "../Grocery";
 
 // // React ELement
 // const heading = (
@@ -28,6 +29,10 @@ import RestaurantMenu from "../RestaurantMenu/RestaurantMenu";
 
 // function componenet - normal JS function
 // props - normal arguments to a function
+
+//lazy function expects a function that returns a promise as a parameter and returns a React component that we can render in the tree
+// React will not load this component until the first time we attempt to render the returned component
+const Grocery = lazy(() => import("../Grocery"));
 
 const AppLayout = () => {
   return (
@@ -55,6 +60,15 @@ const appRouter = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/grocery",
+        element: (
+          // While the code for the lazy component is still loading, attemping to render will suspend. We need to use 'Suspense' to display a loading indicator while it's loading
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <Grocery />
+          </Suspense>
+        ),
       },
       {
         path: "/restaurants/:resId",
