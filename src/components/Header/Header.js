@@ -1,43 +1,80 @@
 import { Link } from "react-router-dom";
+import React from "react";
 import useOnlineStatus from "../../custom-hooks/useOnlineStatus";
+import styled from "styled-components";
+import { UserContext } from "../../utils/UserContext";
+import { useSelector } from "react-redux";
+
 const Header = () => {
   let btnName = "login";
-  const userOnlineStatus = useOnlineStatus();
+  const userOnLineStatus = useOnlineStatus();
+  const { loggedInUser } = React.useContext(UserContext);
+  const cart = useSelector((store) => store.cart.items);
   return (
-    <div className="header">
-      <div className="logo">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqgqV9sezgYxiiPqaJ3NXXvwDbkzgXpCeBWQ&s" />
+    <HeaderWrapper>
+      <div>
+        <Logo src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqgqV9sezgYxiiPqaJ3NXXvwDbkzgXpCeBWQ&s" />
       </div>
-      <div className="nav-items">
-        <ul>
-          <li>Online Status: {userOnlineStatus ? "🟢" : "🔴"}</li>
-          <li key="home">
+      <NavItemsWrapper>
+        <NavItems style={{ border: "1px soListItemd" }}>
+          <ListItem>Online Status: {userOnLineStatus ? "🟢" : "🔴"}</ListItem>
+          <ListItem key="home">
             <Link to="/">Home</Link>
-          </li>
-          <li key="aboutUs">
+          </ListItem>
+          <ListItem key="aboutUs">
             <Link to="/about">About Us</Link>
-          </li>
-          <li key="contactUs">
+          </ListItem>
+          <ListItem key="contactUs">
             <Link to="/contact">Contact Us</Link>
-          </li>
-          <li key="grocery">
+          </ListItem>
+          <ListItem key="grocery">
             <Link to="/grocery">Grocery</Link>
-          </li>
-          <li key="cart">Cart</li>
-          <li key="login">
-            <button
-              onClick={() => {
-                console.log("login btn cliked");
-                btnName = "logOut";
-              }}
-            >
-              {btnName}
-            </button>
-          </li>
-        </ul>
-      </div>
-    </div>
+          </ListItem>
+          <ListItem key="cart">
+            <Link to="/cart">Cart - {cart.length}</Link>
+          </ListItem>
+          <ListItem key="login">
+            <button>{btnName}</button>
+          </ListItem>
+          <ListItem key="User">
+            <button>{loggedInUser}</button>
+          </ListItem>
+        </NavItems>
+      </NavItemsWrapper>
+    </HeaderWrapper>
   );
 };
 
+const HeaderWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 4px 8px hsla(0deg, 0%, 0%, 0.3);
+`;
+
+const Logo = styled.img`
+  width: 100px;
+`;
+
+const NavItemsWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+`;
+
+const NavItems = styled.ul`
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  color: black;
+  padding: 0 24px;
+`;
+
+const ListItem = styled.li`
+  margin: 0 12px;
+  padding: 0 12px;
+  font-size: 24px;
+`;
 export default Header;

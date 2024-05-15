@@ -5,7 +5,7 @@ function User({ name }) {
   const [count1, setCount1] = React.useState(0);
 
   return (
-    <div style={{ border: "1px solid" }}>
+    <div className="m-4 p-4" style={{ border: "1px solid" }}>
       <h1>Count = {count}</h1>
       <h1>Count1 = {count1}</h1>
       <h2>Name: {name}</h2>
