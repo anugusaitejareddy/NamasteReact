@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 
 const Header = () => {
   let btnName = "login";
+  const [isUserLoggedIn, setIsUserLoggedIn] = React.useState(false);
   const userOnLineStatus = useOnlineStatus();
   const { loggedInUser } = React.useContext(UserContext);
   const cart = useSelector((store) => store.cart.items);
@@ -16,7 +17,7 @@ const Header = () => {
         <Logo src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqgqV9sezgYxiiPqaJ3NXXvwDbkzgXpCeBWQ&s" />
       </div>
       <NavItemsWrapper>
-        <NavItems style={{ border: "1px soListItemd" }}>
+        <NavItems>
           <ListItem>Online Status: {userOnLineStatus ? "🟢" : "🔴"}</ListItem>
           <ListItem key="home">
             <Link to="/">Home</Link>
@@ -33,8 +34,11 @@ const Header = () => {
           <ListItem key="cart">
             <Link to="/cart">Cart - {cart.length}</Link>
           </ListItem>
-          <ListItem key="login">
-            <button>{btnName}</button>
+          <ListItem
+            key="login"
+            onClick={() => setIsUserLoggedIn(!isUserLoggedIn)}
+          >
+            <button>{isUserLoggedIn ? "Log Out" : "Log In"}</button>
           </ListItem>
           <ListItem key="User">
             <button>{loggedInUser}</button>

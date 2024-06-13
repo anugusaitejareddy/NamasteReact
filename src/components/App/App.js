@@ -35,7 +35,7 @@ import Cart from "../Cart";
 // function componenet - normal JS function
 // props - normal arguments to a function
 
-//lazy function expects a function that returns a promise as a parameter and returns a React component that we can render in the tree
+//lazy function expects a function that returns a promise as a parameter and the lazy function returns a React component that we can render in the tree
 // React will not load this component until the first time we attempt to render the returned component
 const Grocery = lazy(() => import("../Grocery"));
 

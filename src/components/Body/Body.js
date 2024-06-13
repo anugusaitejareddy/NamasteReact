@@ -53,7 +53,7 @@ const Body = () => {
       res.info.name.toLowerCase().includes(searchTerm)
     );
 
-    setFilteredRestaurants(searchResult);
+    searchResult.length > 0 && setFilteredRestaurants(searchResult);
   }
 
   const isOnline = useOnlineStatus();
@@ -94,7 +94,7 @@ const Body = () => {
         {filteredRestaurants.map((restaurant) => (
           <Link to={`/restaurants/${restaurant.info.id}`}>
             {restaurant.info.avgRating < 4.5 ? (
-              <PromotedResCard resData={restaurant} />
+              <PromotedResCard key={restaurant.info.id} resData={restaurant} />
             ) : (
               <RestaurantCard key={restaurant.info.id} resData={restaurant} />
             )}

@@ -4,6 +4,7 @@ import { CLOUDINARY_URL } from "../../utils/constants";
 import { UserContext } from "../../utils/UserContext";
 
 const RestaurantCard = ({ resData }) => {
+  console.log(resData);
   const { loggedInUser } = React.useContext(UserContext);
   const { name, cuisines, avgRating, cloudinaryImageId, costForTwo } =
     resData.info;
@@ -16,7 +17,6 @@ const RestaurantCard = ({ resData }) => {
       <ResCusinies>{cuisines.join(", ")}</ResCusinies>
       <h4>{avgRating} rating</h4>
       <h4>{costForTwo}</h4>
-      <h4>{loggedInUser}</h4>
     </ResCard>
   );
 };
